@@ -21,13 +21,6 @@ public class ChairHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canSit && Input.GetKeyDown("f"))
-        {
-            player.GetComponent<PlayerInfo>().sitting = true;
-            
-            canSit = false;
-        }
-
         if (player.GetComponent<PlayerInfo>().sitting)
         {
             Transform seat = transform.Find("Seat");
@@ -40,6 +33,18 @@ public class ChairHandler : MonoBehaviour
             target.y += 90;
             target.z = 0;
             player.transform.eulerAngles = target;
+
+            if (Input.GetKeyDown("f"))
+            {
+                player.GetComponent<PlayerInfo>().sitting = false;
+            }
+        }
+
+        if (canSit && Input.GetKeyDown("f"))
+        {
+            player.GetComponent<PlayerInfo>().sitting = true;
+            
+            canSit = false;
         }
     }
 

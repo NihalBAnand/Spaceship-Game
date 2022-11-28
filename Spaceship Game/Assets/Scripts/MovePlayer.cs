@@ -27,6 +27,7 @@ public class MovePlayer : MonoBehaviour
     {
         if (!GetComponent<PlayerInfo>().sitting)
         {
+            controller.detectCollisions = true;
             handleMovement();
         }
         else
