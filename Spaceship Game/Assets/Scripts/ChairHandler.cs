@@ -25,7 +25,7 @@ public class ChairHandler : MonoBehaviour
         {
             Transform seat = transform.Find("Seat");
 
-            seat.eulerAngles += new Vector3(0, Input.GetAxis("Horizontal"), 0);
+            seat.eulerAngles += new Vector3(0, Input.GetAxis("Horizontal") * .5f, 0);
 
             player.transform.position = seat.Find("MoveTo").position;
             Vector3 target = seat.eulerAngles;

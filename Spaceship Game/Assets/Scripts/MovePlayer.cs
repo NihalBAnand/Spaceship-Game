@@ -42,6 +42,15 @@ public class MovePlayer : MonoBehaviour
 
         GetComponent<PlayerInfo>().grounded = isGrounded;
 
+        //if (isGrounded)
+        //{
+        //    speed = 15f;
+        //} 
+        //else
+        //{
+        //    speed = 15f;
+        //}
+
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -52,7 +61,6 @@ public class MovePlayer : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-            Debug.Log("Jumped!");
         }
 
 
