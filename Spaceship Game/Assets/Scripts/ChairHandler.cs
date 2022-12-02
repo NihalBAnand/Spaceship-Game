@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class ChairHandler : MonoBehaviour
 {
-    GameObject tooltip;
+    private GameObject tooltip;
 
-    GameObject player;
+    private GameObject player;
 
     public bool canSit;
     // Start is called before the first frame update
     void Start()
     {
         tooltip = GameObject.Find("ChairTooltip");
-        tooltip.SetActive(false);
+        tooltip.transform.localScale = new Vector3(0, 0, 0);
 
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<PlayerInfo>().sitting)
+        if (player.GetComponent<PlayerInfo>().sitting && player.GetComponent<PlayerInfo>().chair == this)
         {
             Transform seat = transform.Find("Seat");
 
@@ -43,6 +43,7 @@ public class ChairHandler : MonoBehaviour
         if (canSit && Input.GetKeyDown("f"))
         {
             player.GetComponent<PlayerInfo>().sitting = true;
+            player.GetComponent<PlayerInfo>().chair = this;
             
             canSit = false;
         }
@@ -52,7 +53,7 @@ public class ChairHandler : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            tooltip.SetActive(true);
+            tooltip.transform.localScale = new Vector3(1, 1, 1);
             canSit = true;
         }
     }
@@ -60,7 +61,7 @@ public class ChairHandler : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            tooltip.SetActive(false);
+            tooltip.transform.localScale = new Vector3(0, 0, 0);
             canSit = false;
         }
     }
