@@ -24,6 +24,6 @@ public class LargeGravityBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.eulerAngles += new Vector3(0, .1f, 0);
+        transform.eulerAngles += new Vector3(0, .005f, 0);
     }
 }

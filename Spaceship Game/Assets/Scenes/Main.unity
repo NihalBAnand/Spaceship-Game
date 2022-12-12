@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016090982, g: 0.01466979, b: 0.013826404, a: 1}
+  m_IndirectSpecularColor: {r: 0.0014785795, g: 0.0013591028, b: 0.0012890887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -433,7 +433,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 3.402823e+33
+  far clip plane: 3.402823e+10
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5
@@ -460,13 +460,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 77791.83}
+  m_LocalPosition: {x: 0, y: 0, z: 77791.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0, y: 0, z: 0}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0dc1d061423654fa98f802dfe76802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistanceFromOrigin: 3000
+  maxDistanceFromOrigin: 1000
 --- !u!1 &1312427997
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 0
+  shader: {fileID: 0}
 --- !u!1 &1327203961
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 0
+  shader: {fileID: 7200000, guid: 88daa08700b08d348824907f9ca49126, type: 3}
 --- !u!135 &1327203963
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -691,7 +693,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b97124e536a80a548ab3ced78b191073, type: 2}
+  - {fileID: 2100000, guid: 6e9cbf59fdbc75b48adaa6aa7bf8c211, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -720,7 +722,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327203961}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4711208715938537054, guid: 653ceb6d23ab3eb4d9d75b334a630ff6, type: 3}
 --- !u!4 &1327203966
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +730,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327203961}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 77800}
   m_LocalScale: {x: 6.9911, y: 6.9911, z: 6.9911}
   m_ConstrainProportionsScale: 0
@@ -736,7 +738,7 @@ Transform:
   - {fileID: 2073453199}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
 --- !u!1 &1443271337
 GameObject:
   m_ObjectHideFlags: 0

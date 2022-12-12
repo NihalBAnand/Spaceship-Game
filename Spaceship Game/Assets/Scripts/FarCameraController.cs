@@ -16,12 +16,16 @@ public class FarCameraController : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) > maxDistanceFromOrigin)
         {
-            Vector3 moveAway = transform.position * -1;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), maxDistanceFromOrigin);
+            //Save the current position, and move to the origin
+            Vector3 oldPosition = transform.position;
+            transform.position = new Vector3(0, 0, 0);
+
+            //Get all far camera objects, and move them to be in the same positions relative to the far camera
             GameObject[] objects = GameObject.FindGameObjectsWithTag("CelestialBodies");
             foreach (GameObject obj in objects)
             {
-                obj.transform.position = Vector3.MoveTowards(obj.transform.position, moveAway, maxDistanceFromOrigin);
+                Vector3 newPosition = obj.transform.position - oldPosition;
+                obj.transform.position = newPosition;
             }
         }
     }
