@@ -1,29 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LargeGravityBody : MonoBehaviour
 {
-    static float GRAVITATIONAL_CONSTANT = 6.6743f * Mathf.Pow(10, -11) * 100000f;
+    static float SIMULATION_SPEED = 100;
+    static float GRAVITATIONAL_CONSTANT = 6.6743f * Mathf.Pow(10, -16);
 
     public static List<LargeGravityBody> bodies = new List<LargeGravityBody>();
 
     public float mass;
-    //public float approxRadius;
 
+    public float realtimeHoursPerRotation;
+
+    Vector3 velocityVector;
+
+    public GameObject satelliteOf;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         bodies.Add(this);
 
-        //Vector3 meshBounds = GetComponent<MeshFilter>().mesh.bounds.size;
-        //meshBounds = Vector3.Scale(transform.localScale, meshBounds);
-        //approxRadius = (meshBounds.x + meshBounds.y + meshBounds.z) / 3 / 2;
+        if (satelliteOf != null)
+        {
+            velocityVector = Vector3.Cross((transform.position - satelliteOf.transform.position), Vector3.up).normalized;
+            float startingVelocity = Mathf.Pow(GRAVITATIONAL_CONSTANT * satelliteOf.GetComponent<LargeGravityBody>().mass / Vector3.Distance(transform.position, satelliteOf.transform.position), 0.5f) ;
+            velocityVector *= startingVelocity;
+        }
+        else
+        {
+            velocityVector = new Vector3(0, 0, 0);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.eulerAngles += new Vector3(0, .005f, 0);
+        //Rotate around the axis
+        float rotateSpeed = (360 / (realtimeHoursPerRotation * 3600)) * SIMULATION_SPEED;
+        transform.RotateAround(transform.position, transform.forward, rotateSpeed * Time.deltaTime);
+
+        foreach (LargeGravityBody body in bodies)
+        {
+            if (body == this)
+            {
+                continue;
+            }
+            float forceOfGravity = GRAVITATIONAL_CONSTANT * (mass * body.mass / Mathf.Pow(Vector3.Distance(transform.position, body.gameObject.transform.position), 2));
+            float acceleration = (forceOfGravity / mass);
+            Vector3 accelVector = ((body.gameObject.transform.position - transform.position) / Vector3.Distance(transform.position, body.gameObject.transform.position)) * acceleration;
+            velocityVector += accelVector * Time.deltaTime;
+        }
+
+        transform.position += velocityVector * Time.deltaTime ;
     }
 }
