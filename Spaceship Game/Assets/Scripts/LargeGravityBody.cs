@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class LargeGravityBody : MonoBehaviour
 {
-    static float SIMULATION_SPEED = 100;
-    static float GRAVITATIONAL_CONSTANT = 6.6743f * Mathf.Pow(10, -16);
+    static float SIMULATION_SPEED = 1000;
+    static float GRAVITATIONAL_CONSTANT = 6.6743f * Mathf.Pow(10, -11);
+    static float SCALE = 10000000f;
 
     public static List<LargeGravityBody> bodies = new List<LargeGravityBody>();
 
@@ -26,8 +27,8 @@ public class LargeGravityBody : MonoBehaviour
 
         if (satelliteOf != null)
         {
-            velocityVector = Vector3.Cross((transform.position - satelliteOf.transform.position), Vector3.up).normalized;
-            float startingVelocity = Mathf.Pow(GRAVITATIONAL_CONSTANT * satelliteOf.GetComponent<LargeGravityBody>().mass / Vector3.Distance(transform.position, satelliteOf.transform.position), 0.5f) ;
+            velocityVector = Vector3.Cross((transform.position * SCALE - satelliteOf.transform.position * SCALE), Vector3.up).normalized;
+            float startingVelocity = Mathf.Pow(GRAVITATIONAL_CONSTANT * satelliteOf.GetComponent<LargeGravityBody>().mass / Vector3.Distance(transform.position * SCALE, satelliteOf.transform.position * SCALE), 0.5f);
             velocityVector *= startingVelocity;
         }
         else
@@ -49,12 +50,12 @@ public class LargeGravityBody : MonoBehaviour
             {
                 continue;
             }
-            float forceOfGravity = GRAVITATIONAL_CONSTANT * (mass * body.mass / Mathf.Pow(Vector3.Distance(transform.position, body.gameObject.transform.position), 2));
+            float forceOfGravity = GRAVITATIONAL_CONSTANT * (mass * body.mass / Mathf.Pow(Vector3.Distance(transform.position * SCALE, body.gameObject.transform.position * SCALE), 2));
             float acceleration = (forceOfGravity / mass);
-            Vector3 accelVector = ((body.gameObject.transform.position - transform.position) / Vector3.Distance(transform.position, body.gameObject.transform.position)) * acceleration;
+            Vector3 accelVector = ((body.gameObject.transform.position * SCALE - transform.position * SCALE) / Vector3.Distance(transform.position * SCALE, body.gameObject.transform.position * SCALE)) * acceleration;
             velocityVector += accelVector * Time.deltaTime;
         }
 
-        transform.position += velocityVector * Time.deltaTime ;
+        transform.position += ((velocityVector * Time.deltaTime) / SCALE) * SIMULATION_SPEED;
     }
 }
