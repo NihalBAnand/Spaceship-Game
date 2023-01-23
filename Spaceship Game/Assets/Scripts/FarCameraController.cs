@@ -48,8 +48,8 @@ public class FarCameraController : MonoBehaviour
                         break;
                 }
             }
-            Debug.Log(direction);
-            transform.position = anchor.transform.position + direction * distanceToAnchor;
+            //Debug.Log(direction);
+            transform.position = anchor.transform.position + (direction * distanceToAnchor);
 
             transform.LookAt(anchor.transform.position);
         }

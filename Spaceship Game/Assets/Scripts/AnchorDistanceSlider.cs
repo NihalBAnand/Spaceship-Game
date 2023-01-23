@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AnchorDistanceSlider : MonoBehaviour
 {
-    public FarCameraController camera;
+    public FarCameraController farCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +15,6 @@ public class AnchorDistanceSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        camera.distanceToAnchor = GetComponent<Slider>().value;
+        farCamera.distanceToAnchor = GetComponent<Slider>().value;
     }
 }
